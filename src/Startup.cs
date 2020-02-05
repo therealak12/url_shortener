@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using src.Contexts;
 
 namespace src
 {
@@ -26,6 +28,8 @@ namespace src
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+	    services.AddDbContext<AppDbContext>(options => options.UseNpgsql(Configuration["ConnectionStrings:Booking"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
