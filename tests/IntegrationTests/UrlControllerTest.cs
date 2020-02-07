@@ -50,7 +50,7 @@ namespace tests.IntegrationTests
 		[Fact]
 		public async Task CheckOkShortening()
 		{
-			UrlRequest request = new UrlRequest(){LongUrl = "https://www.google.com"};
+			UrlRequest request = new UrlRequest(){LongUrl = "https://www.google.com/"};
 			var stringContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
 
 			var response = await client.PostAsync("/urls", stringContent);
