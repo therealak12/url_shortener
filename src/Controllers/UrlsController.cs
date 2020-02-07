@@ -18,10 +18,15 @@ namespace src.Controllers {
 		public IActionResult CreateShortUrl([FromBody] UrlRequest request)
 		{
 			string longUrl = request.LongUrl;
+			if (!longUrl.Contains("http", StringComparison.OrdinalIgnoreCase))
+			{
+				longUrl = "http://" + longUrl;
+			}
 			if (!UrlUtils.IsUrlValid(longUrl))
 			{
 				return BadRequest();
 			}
+			longUrl = UrlUtils.GetIdn(longUrl);
 
 			string shortUrl = urlService.MapToShort(longUrl);
 			UrlResponse urlResponse = new UrlResponse()
@@ -37,7 +42,7 @@ namespace src.Controllers {
 
 		[HttpGet("{shortUrl}")]
 		public IActionResult RedirectToLong(string shortUrl)
-		{
+		{	
 			UrlResponse savedUrl = urlService.GetSavedUrl(shortUrl);
 			if (savedUrl == null)
 			{
