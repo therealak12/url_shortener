@@ -22,5 +22,12 @@ namespace tests.UnitTests
 			Assert.False(UrlUtils.IsUrlValid("https//www"), "Incomplete url");
 			Assert.False(UrlUtils.IsUrlValid("https//www..google"), "Incomplete and Invalid url");
 		}
+
+		[Fact]
+		public void TestGetIdn()
+		{
+			Assert.Equal("http://xn--mgbmg1g.xn--wgb4b2sveb/", UrlUtils.GetIdn("http://احمد.کریمی"));
+			Assert.Equal("https://www.google.com/", UrlUtils.GetIdn("https://www.google.com/"));
+		}
 	}
 }
