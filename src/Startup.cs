@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using src.Contexts;
 using src.Services.Bases;
 using src.Services;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace src
 {
@@ -34,6 +35,11 @@ namespace src
 	    services.AddDbContext<AppDbContext>(options => options.UseNpgsql(Configuration["ConnectionStrings:Booking"]));
 
 	    services.AddScoped<IUrlService, UrlService>();
+
+	    services.AddMvc(options => 
+		{
+			options.InputFormatters.Insert(0, new RawJsonBodyInputFormatter());
+		});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
