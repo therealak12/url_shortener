@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Download and install the prerequisites according to you operating system from [here](https://docs.microsoft.com/en-us/dotnet/core/install).
 
-### Running the prject
+### Running the project
 
 
 ```bash
